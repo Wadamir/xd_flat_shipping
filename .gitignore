@@ -33,13 +33,6 @@
 !/admin/language/ru-ru/extension/shipping/xd_flat.php
 
 
-/admin/model/*
-!/admin/model/
-/admin/model/catalog/*
-!/admin/model/catalog/
-!/admin/model/catalog/bulk_copy.php
-
-
 /admin/view/*
 !/admin/view/
 
@@ -52,25 +45,45 @@
 !/admin/view/template/
 /admin/view/template/extension/*
 !/admin/view/template/extension/
-/admin/view/template/extension/module/*
-!/admin/view/template/extension/module/
-!/admin/view/template/extension/module/xd_flat.twig
-
-/admin/view/stylesheet/*
-!/admin/view/stylesheet/
-!/admin/view/stylesheet/xd_flat.css
-!/admin/view/stylesheet/bulk_copy.css
-
-/admin/view/template/catalog/*
-!/admin/view/template/catalog/
-!/admin/view/template/catalog/bulk_copy.twig
-
-/catalog/
+/admin/view/template/extension/shipping/*
+!/admin/view/template/extension/shipping/
+!/admin/view/template/extension/shipping/xd_flat.twig
 
 
-/system/*
-!/system/
-!/system/xd_flat.ocmod.xml
+
+/catalog/*
+!/catalog/
+
+/catalog/language/*
+!/catalog/language/
+
+/catalog/language/en-gb/*
+!/catalog/language/en-gb/
+/catalog/language/en-gb/extension/*
+!/catalog/language/en-gb/extension/
+/catalog/language/en-gb/extension/shipping/*
+!/catalog/language/en-gb/extension/shipping/
+!/catalog/language/en-gb/extension/shipping/xd_flat.php
+
+/catalog/language/ru-ru/*
+!/catalog/language/ru-ru/
+/catalog/language/ru-ru/extension/*
+!/catalog/language/ru-ru/extension/
+/catalog/language/ru-ru/extension/shipping/*
+!/catalog/language/ru-ru/extension/shipping/
+!/catalog/language/ru-ru/extension/shipping/xd_flat.php
+
+/catalog/model/*
+!/catalog/model/
+/catalog/model/extension/*
+!/catalog/model/extension/
+/catalog/model/extension/shipping/*
+!/catalog/model/extension/shipping/
+!/catalog/model/extension/shipping/xd_flat.php
+
+
+
+/system/
 
 
 /image/
