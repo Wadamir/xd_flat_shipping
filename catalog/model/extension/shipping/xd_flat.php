@@ -1,40 +1,56 @@
 <?php
-class ModelExtensionShippingFlat extends Model {
-	function getQuote($address) {
-		$this->load->language('extension/shipping/flat');
+class ModelExtensionShippingXdFlat extends Model
+{
+    public function getQuote($address)
+    {
+        $this->load->language('extension/shipping/xd_flat');
 
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('shipping_flat_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+        if (!$this->config->get('shipping_xd_flat_status')) {
+            return array();
+        }
 
-		if (!$this->config->get('shipping_flat_geo_zone_id')) {
-			$status = true;
-		} elseif ($query->num_rows) {
-			$status = true;
-		} else {
-			$status = false;
-		}
+        $quote_data = array();
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "xd_flat_rate` WHERE status = '1' ORDER BY sort_order ASC, xd_flat_rate_id ASC");
 
-		$method_data = array();
+        foreach ($query->rows as $rate) {
+            if (!$this->isRateAvailable($rate, $address)) {
+                continue;
+            }
 
-		if ($status) {
-			$quote_data = array();
+            $title = trim($rate['title']) !== '' ? $rate['title'] : $this->language->get('text_description');
+            $cost = (float)$rate['cost'];
+            $tax_class_id = (int)$rate['tax_class_id'];
 
-			$quote_data['flat'] = array(
-				'code'         => 'flat.flat',
-				'title'        => $this->language->get('text_description'),
-				'cost'         => $this->config->get('shipping_flat_cost'),
-				'tax_class_id' => $this->config->get('shipping_flat_tax_class_id'),
-				'text'         => $this->currency->format($this->tax->calculate($this->config->get('shipping_flat_cost'), $this->config->get('shipping_flat_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-			);
+            $quote_data['xd_flat_' . (int)$rate['xd_flat_rate_id']] = array(
+                'code' => 'xd_flat.' . (int)$rate['xd_flat_rate_id'],
+                'title' => $title,
+                'cost' => $cost,
+                'tax_class_id' => $tax_class_id,
+                'text' => $this->currency->format($this->tax->calculate($cost, $tax_class_id, $this->config->get('config_tax')), $this->session->data['currency'])
+            );
+        }
 
-			$method_data = array(
-				'code'       => 'flat',
-				'title'      => $this->language->get('text_title'),
-				'quote'      => $quote_data,
-				'sort_order' => $this->config->get('shipping_flat_sort_order'),
-				'error'      => false
-			);
-		}
+        if (!$quote_data) {
+            return array();
+        }
 
-		return $method_data;
-	}
+        return array(
+            'code' => 'xd_flat',
+            'title' => $this->language->get('text_title'),
+            'quote' => $quote_data,
+            'sort_order' => $this->config->get('shipping_xd_flat_sort_order'),
+            'error' => false
+        );
+    }
+
+    private function isRateAvailable($rate, $address)
+    {
+        if ((int)$rate['geo_zone_id'] === 0) {
+            return true;
+        }
+
+        $query = $this->db->query("SELECT zone_to_geo_zone_id FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE geo_zone_id = '" . (int)$rate['geo_zone_id'] . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0') LIMIT 1");
+
+        return (bool)$query->num_rows;
+    }
 }

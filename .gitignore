@@ -33,6 +33,15 @@
 !/admin/language/ru-ru/extension/shipping/xd_flat.php
 
 
+/admin/model/*
+!/admin/model/
+/admin/model/extension/*
+!/admin/model/extension/
+/admin/model/extension/shipping/*
+!/admin/model/extension/shipping/
+!/admin/model/extension/shipping/xd_flat.php
+
+
 /admin/view/*
 !/admin/view/
 
