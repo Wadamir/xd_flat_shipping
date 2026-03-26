@@ -56,6 +56,7 @@
 								<thead>
 									<tr>
 										<td class="text-left">{{ entry_title }}</td>
+										<td class="text-left" style="width: 90px;">{{ entry_image }}</td>
 										<td class="text-left" style="width: 120px;">{{ entry_cost }}</td>
 										<td class="text-left" style="width: 180px;">{{ entry_tax_class }}</td>
 										<td class="text-left" style="width: 180px;">{{ entry_geo_zone }}</td>
@@ -69,6 +70,10 @@
 									{% for rate in shipping_xd_flat_rate %}
 									<tr id="rate-row{{ rate_row }}">
 										<td class="text-left"><input type="text" name="shipping_xd_flat_rate[{{ rate_row }}][title]" value="{{ rate.title }}" placeholder="{{ entry_title }}" class="form-control" /></td>
+										<td class="text-left">
+											<a href="" id="thumb-image-{{ rate_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ rate.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+											<input type="hidden" name="shipping_xd_flat_rate[{{ rate_row }}][image]" value="{{ rate.image|default('') }}" id="input-image-{{ rate_row }}" />
+										</td>
 										<td class="text-left"><input type="text" name="shipping_xd_flat_rate[{{ rate_row }}][cost]" value="{{ rate.cost }}" placeholder="{{ entry_cost }}" class="form-control" /></td>
 										<td class="text-left">
 											<select name="shipping_xd_flat_rate[{{ rate_row }}][tax_class_id]" class="form-control">
@@ -113,7 +118,7 @@
 								</tbody>
 								<tfoot>
 									<tr>
-										<td colspan="6"></td>
+										<td colspan="7"></td>
 										<td class="text-right"><button type="button" onclick="addRate();" data-toggle="tooltip" title="{{ button_add_rate }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
 									</tr>
 								</tfoot>
@@ -132,6 +137,7 @@ var rate_row = {{ rate_row|default(0) }};
 function addRate() {
 	html  = '<tr id="rate-row' + rate_row + '">';
 	html += '<td class="text-left"><input type="text" name="shipping_xd_flat_rate[' + rate_row + '][title]" value="" placeholder="{{ entry_title }}" class="form-control" /></td>';
+	html += '<td class="text-left"><a href="" id="thumb-image-' + rate_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="shipping_xd_flat_rate[' + rate_row + '][image]" value="" id="input-image-' + rate_row + '" /></td>';
 	html += '<td class="text-left"><input type="text" name="shipping_xd_flat_rate[' + rate_row + '][cost]" value="" placeholder="{{ entry_cost }}" class="form-control" /></td>';
 	html += '<td class="text-left"><select name="shipping_xd_flat_rate[' + rate_row + '][tax_class_id]" class="form-control"><option value="0">{{ text_none }}</option>{% for tax_class in tax_classes %}<option value="{{ tax_class.tax_class_id }}">{{ tax_class.title|e('js') }}</option>{% endfor %}</select></td>';
 	html += '<td class="text-left"><select name="shipping_xd_flat_rate[' + rate_row + '][geo_zone_id]" class="form-control"><option value="0">{{ text_all_zones }}</option>{% for geo_zone in geo_zones %}<option value="{{ geo_zone.geo_zone_id }}">{{ geo_zone.name|e('js') }}</option>{% endfor %}</select></td>';

@@ -4,6 +4,7 @@ class ModelExtensionShippingXdFlat extends Model
     public function getQuote($address)
     {
         $this->load->language('extension/shipping/xd_flat');
+        $this->load->model('tool/image');
 
         if (!$this->config->get('shipping_xd_flat_status')) {
             return array();
@@ -20,10 +21,16 @@ class ModelExtensionShippingXdFlat extends Model
             $title = trim($rate['title']) !== '' ? $rate['title'] : $this->language->get('text_description');
             $cost = (float)$rate['cost'];
             $tax_class_id = (int)$rate['tax_class_id'];
+            $image = '';
+
+            if (!empty($rate['image']) && is_file(DIR_IMAGE . $rate['image'])) {
+                $image = $this->model_tool_image->resize($rate['image'], 32, 32);
+            }
 
             $quote_data[(int)$rate['xd_flat_rate_id']] = array(
                 'code' => 'xd_flat.' . (int)$rate['xd_flat_rate_id'],
                 'title' => $title,
+                'image' => $image,
                 'cost' => $cost,
                 'tax_class_id' => $tax_class_id,
                 'text' => $this->currency->format($this->tax->calculate($cost, $tax_class_id, $this->config->get('config_tax')), $this->session->data['currency'])

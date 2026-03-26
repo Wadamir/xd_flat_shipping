@@ -11,6 +11,7 @@ $_['text_all_zones']   = 'Все зоны';
 
 // Entry
 $_['entry_title']      = 'Название';
+$_['entry_image']      = 'Изображение';
 $_['entry_cost']       = 'Стоимость';
 $_['entry_tax_class']  = 'Класс налога';
 $_['entry_geo_zone']   = 'Географическая зона';

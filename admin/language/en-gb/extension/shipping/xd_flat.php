@@ -11,6 +11,7 @@ $_['text_all_zones']   = 'All Zones';
 
 // Entry
 $_['entry_title']      = 'Title';
+$_['entry_image']      = 'Image';
 $_['entry_cost']       = 'Cost';
 $_['entry_tax_class']  = 'Tax Class';
 $_['entry_geo_zone']   = 'Geo Zone';
