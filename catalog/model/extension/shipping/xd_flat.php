@@ -21,7 +21,7 @@ class ModelExtensionShippingXdFlat extends Model
             $cost = (float)$rate['cost'];
             $tax_class_id = (int)$rate['tax_class_id'];
 
-            $quote_data['xd_flat_' . (int)$rate['xd_flat_rate_id']] = array(
+            $quote_data[(int)$rate['xd_flat_rate_id']] = array(
                 'code' => 'xd_flat.' . (int)$rate['xd_flat_rate_id'],
                 'title' => $title,
                 'cost' => $cost,

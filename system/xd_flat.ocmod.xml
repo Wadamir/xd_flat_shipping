@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+	<name>XD Flat Checkout Cards</name>
+	<code>xd_flat_checkout_cards</code>
+	<version>1.0.0</version>
+	<author>xdomus</author>
+	<link></link>
+
+	<file path="catalog/controller/checkout/checkout.php">
+		<operation>
+			<search><![CDATA[
+                $this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
+            ]]></search>
+			<add position="after"><![CDATA[
+                $this->document->addStyle('catalog/view/theme/default/stylesheet/xd_flat_shipping.css');
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/controller/checkout/shipping_method.php">
+		<operation>
+			<search><![CDATA[
+                $method_data[$result['code']] = array(
+            ]]></search>
+			<add position="after"><![CDATA[
+				'code' => $result['code'],
+			]]></add>
+		</operation>
+	</file>
+
+    <file path="catalog/view/theme/*/template/checkout/shipping_method.twig">
+        <operation>
+            <search><![CDATA[
+                <p><strong>{{ shipping_method.title }}</strong></p>
+            ]]></search>
+            <add position="replace"><![CDATA[
+                <p class="{{ shipping_method.code }}"><strong>{{ shipping_method.title }}</strong></p>
+            ]]></add>
+        </operation>
+		<operation>
+			<search><![CDATA[
+                <div class="radio">
+            ]]></search>
+			<add position="replace"><![CDATA[
+                <div class="radio {{ shipping_method.code }}">
+			]]></add>
+		</operation>
+		<operation>
+			<search><![CDATA[
+                <label>
+            ]]></search>
+			<add position="replace"><![CDATA[
+                <label for ="{{ shipping_method.code }}-{{ loop.index }}">
+			]]></add>
+		</operation>        
+		<operation>
+			<search><![CDATA[
+                <input type="radio" name="shipping_method"
+            ]]></search>
+			<add position="replace"><![CDATA[
+                <input type="radio" name="shipping_method" id="{{ shipping_method.code }}-{{ loop.index }}"
+			]]></add>
+		</operation>                
+	</file>
+
+</modification>

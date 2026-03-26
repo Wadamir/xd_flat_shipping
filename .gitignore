@@ -1,7 +1,6 @@
 /*.*
 !.gitignore
 !README.md
-
 /admin/*
 !/admin/
 
@@ -90,9 +89,13 @@
 !/catalog/model/extension/shipping/
 !/catalog/model/extension/shipping/xd_flat.php
 
+/catalog/view/theme/default/stylesheet/xd_flat_shipping.css
 
 
-/system/
+
+/system/*
+!/system/
+!/system/xd_flat.ocmod.xml
 
 
 /image/
