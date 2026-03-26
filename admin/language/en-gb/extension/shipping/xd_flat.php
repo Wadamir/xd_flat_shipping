@@ -17,6 +17,8 @@ $_['entry_tax_class']  = 'Tax Class';
 $_['entry_geo_zone']   = 'Geo Zone';
 $_['entry_status']     = 'Status';
 $_['entry_sort_order'] = 'Sort Order';
+$_['entry_icon_width']  = 'Icon Width (px)';
+$_['entry_icon_height'] = 'Icon Height (px)';
 
 // Button
 $_['button_add_rate']  = 'Add Rate';

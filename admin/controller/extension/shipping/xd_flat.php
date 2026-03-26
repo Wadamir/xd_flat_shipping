@@ -62,6 +62,18 @@ class ControllerExtensionShippingXdFlat extends Controller
             $data['shipping_xd_flat_sort_order'] = $this->config->get('shipping_xd_flat_sort_order');
         }
 
+        if (isset($this->request->post['shipping_xd_flat_icon_width'])) {
+            $data['shipping_xd_flat_icon_width'] = (int)$this->request->post['shipping_xd_flat_icon_width'];
+        } else {
+            $data['shipping_xd_flat_icon_width'] = (int)$this->config->get('shipping_xd_flat_icon_width') ?: 32;
+        }
+
+        if (isset($this->request->post['shipping_xd_flat_icon_height'])) {
+            $data['shipping_xd_flat_icon_height'] = (int)$this->request->post['shipping_xd_flat_icon_height'];
+        } else {
+            $data['shipping_xd_flat_icon_height'] = (int)$this->config->get('shipping_xd_flat_icon_height') ?: 32;
+        }
+
         $this->load->model('localisation/tax_class');
         $data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
 

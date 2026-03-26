@@ -66,7 +66,7 @@
                 {{ quote.title }} - {{ quote.text }}</label>
             ]]></search>
 			<add position="before"><![CDATA[
-                {% if quote.image %}<img src="{{ quote.image }}" alt="{{ quote.title }}" style="width: 32px; height: 32px; object-fit: contain; margin-right: 8px;" />{% endif %}
+                {% if quote.image %}<img src="{{ quote.image }}" alt="{{ quote.title }}" class="xd-flat-shipping-icon" />{% endif %}
 			]]></add>
 		</operation>
     </file>

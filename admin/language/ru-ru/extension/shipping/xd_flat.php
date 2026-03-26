@@ -17,6 +17,8 @@ $_['entry_tax_class']  = 'Класс налога';
 $_['entry_geo_zone']   = 'Географическая зона';
 $_['entry_status']     = 'Статус';
 $_['entry_sort_order'] = 'Порядок сортировки';
+$_['entry_icon_width']  = 'Ширина иконки (px)';
+$_['entry_icon_height'] = 'Высота иконки (px)';
 
 // Button
 $_['button_add_rate']  = 'Добавить тариф';

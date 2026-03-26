@@ -24,7 +24,9 @@ class ModelExtensionShippingXdFlat extends Model
             $image = '';
 
             if (!empty($rate['image']) && is_file(DIR_IMAGE . $rate['image'])) {
-                $image = $this->model_tool_image->resize($rate['image'], 32, 32);
+                $icon_w = (int)$this->config->get('shipping_xd_flat_icon_width') ?: 32;
+                $icon_h = (int)$this->config->get('shipping_xd_flat_icon_height') ?: 32;
+                $image = $this->model_tool_image->resize($rate['image'], $icon_w, $icon_h);
             }
 
             $quote_data[(int)$rate['xd_flat_rate_id']] = array(
