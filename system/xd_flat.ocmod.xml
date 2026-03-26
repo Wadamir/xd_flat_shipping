@@ -60,7 +60,14 @@
 			<add position="replace"><![CDATA[
                 <input type="radio" name="shipping_method" id="{{ shipping_method.code }}-{{ loop.index }}"
 			]]></add>
-		</operation>                
-	</file>
-
+		</operation>
+		<operation>
+			<search><![CDATA[
+                {{ quote.title }} - {{ quote.text }}</label>
+            ]]></search>
+			<add position="before"><![CDATA[
+                {% if quote.image %}<img src="{{ quote.image }}" alt="{{ quote.title }}" style="width: 32px; height: 32px; object-fit: contain; margin-right: 8px;" />{% endif %}
+			]]></add>
+		</operation>
+    </file>
 </modification>
